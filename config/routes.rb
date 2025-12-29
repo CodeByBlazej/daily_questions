@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
+  devise_for :users, skip: [ :registrations ]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
+  root "today#show"
+  get "/today", to: "today#show", as: :today
+
+  post "/assignments/:id/answer", to: "assignments#answer", as: :answer_assignment
+
+  resources :questions, only: [ :index, :create, :destroy ]
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check

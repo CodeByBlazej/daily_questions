@@ -1,0 +1,18 @@
+<h1>Today</h1>
+
+<p>
+  Logged in as: <strong><%= current_user.name %></strong> |
+  <%= link_to "Your questions", questions_path %> |
+  <%= button_to "Log out", destroy_user_session_path, method: :delete %>
+</p>
+
+<% if @assignment.present? %>
+  <h2>Your question</h2>
+  <p style="font-size: 1.2rem;"><%= @assignment.question.body %></p>
+  <p><em>Written by <%= @assignment.question.author.name %></em></p>
+
+  <%= button_to "Answered ✅", answer_assignment_path(@assignment), method: :post %>
+<% else %>
+  <p><%= @message %></p>
+<% end %>
+
